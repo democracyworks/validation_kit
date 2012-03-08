@@ -1,0 +1,69 @@
+validates_as_phone
+==================
+
+
+Strict validation module for phone numbers that supports classifications and
+areas.
+
+= General usage
+
+== Installation
+
+You can install the plugin the traditional way. Go to your application root
+and do:
+
+  script/plugin install git://github.com/paulschreiber/validates_as_phone.git
+
+== Validate your model attributes
+
+Example:
+
+There are three ways to specify the country:
+ (1) Pass the country name in as a string parameter (:country => "CA")
+ class Person < ActiveRecord::Base
+   validates_as_phone :phone, :country => "CA", :allow_blank => true, :set => true
+ end
+
+ (2) Create an attribute (country field) named foo in your object, and pass in a reference to foo:
+
+ class Person < ActiveRecord::Base
+   validates_as_phone :phone, :country => :foo
+ end
+
+ (3) Create an attribute named country it in your object, i.e. Person#country
+     i.e. country is the default name for your country field, and the validator tries that automatically
+
+ class Person < ActiveRecord::Base
+   validates_as_phone :phone
+ end
+
+The :set parameter tells the validator to reformat the phone number (change punctuation and spacing) in to a standard format.
+
+
+Supported countries are Canada (CA), the United States (US) and Australia (AU).
+
+
+= License
+
+Written by Kristina Lim (http://i-think.com.ph/kristina/)
+
+Copyright (c) 2008 Syndeo Media
+http://syndeomedia.com
+
+US and Canada support added by Paul Schreiber (http://paulschreiber.com/)
+Last modified 07 September 2010
+Extension support added 17 November 2010
+
+= Contributing
+
+If you wish to contribute to the project, you may contact the author through:
+
+'kristinasyndeomediacom'.insert(8, '@').insert(20, '.')
+
+= Acknowledgements
+
+This plugin is named after the validates_as_phone plugin of Jerrod Blavos
+(http://code.google.com/p/validates-as-phone/). Admittedly, this plugin was
+built over the latter, but as the purposes of this plugin is more complex than
+that of the minimal one, practically all of the code has been written over by
+now.
