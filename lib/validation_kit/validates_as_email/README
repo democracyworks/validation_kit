@@ -1,0 +1,32 @@
+validates_as_email
+==================
+
+Validation module for email addresses.
+
+Installation
+============
+
+You can install the plugin the traditional way. Go to your application root
+and do:
+
+  script/plugin install git://github.com/paulschreiber/validates_as_email.git
+
+Example
+=======
+
+class Person < ActiveRecord::Base
+  validates_as_email :email
+end
+
+p = Person.new(:email => "Bob")
+p.valid?   # false
+
+p = Person.new(:email => "joe@foobar.com")
+p.valid?   # true
+
+Just like with built-in ActiveRecord validations, you can optionally supply a :message parameter with a custom error. Or, you can use Rails' built-in localization system and 
+
+
+= License
+
+Copyright (c) 2010 Paul Schreiber, released under the MIT license
