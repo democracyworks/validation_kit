@@ -1,0 +1,59 @@
+Validates Mixed Case Of
+=======================
+
+When validating a string item, ensure it is not all in capital or lowercase letters.
+
+Example
+=======
+
+class Person < ActiveRecord::Base
+	validates_mixed_case_of :firstname
+end
+
+p = Person.new(:firstname => "BOB")
+p.valid?   # false
+p = Person.new(:firstname => "Bob")
+p.valid?   # true
+
+Attribute Names
+===============
+Attribute names are looked up using Rails' I18n system. Create a hierarchy like so:
+
+en:
+  activerecord:
+    models:
+      attributes:
+        person:
+            firstname: "first name"
+
+Alternately, pass in the :attribute_name option:
+
+class Person < ActiveRecord::Base
+	validates_mixed_case_of :firstname, :attribute_name => "first name"
+end
+
+
+Error Messages
+==============
+Error messages follow the standard ActiveRecord lookup method.
+
+You'll likely error messages can be customized like so:
+
+en:
+  activerecord:
+    errors:
+      models:
+        attributes:
+          person:
+            firstname:
+              all_caps: "first name should not be in all caps"
+
+Alternatively, pass in tje :all_caps option:
+
+class Person < ActiveRecord::Base
+	validates_mixed_case_of :firstname, :all_caps => "don't shout at me, bro"
+end
+
+
+
+Copyright 2011 Paul Schreiber, released under the MIT license

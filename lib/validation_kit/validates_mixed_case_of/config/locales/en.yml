@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    errors:
+      messages:
+        all_caps: "%{item} cannot be in all caps"
+        all_lowercase: "%{item} cannot be in all lowercase"
