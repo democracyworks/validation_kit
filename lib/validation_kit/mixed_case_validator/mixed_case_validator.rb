@@ -4,8 +4,8 @@ module ValidationKit
     ALL_LOWERCASE = -1
 
     def validate_each(record, attribute, value)
-      next if value.nil?
-      next if value.gsub(/\W/, "").size < 3 # skip very short words
+      return if value.nil?
+      return if value.gsub(/\W/, "").size < 3 # skip very short words
       error = nil
 
       if (value.upcase == value)
@@ -14,7 +14,7 @@ module ValidationKit
         error = ALL_LOWERCASE
       end
 
-      next if error.nil?
+      return if error.nil?
 
       item_name = I18n.t("activerecord.models.attributes.#{name.underscore}.#{attribute}",
                          :default => nil) or options[:attribute_name] or attribute

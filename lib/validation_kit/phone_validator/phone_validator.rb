@@ -23,9 +23,9 @@ module ValidationKit
         country = false
       end
 
-      next unless country
+      return unless country
       current_regex = regex_for_country(country)
-      next unless current_regex
+      return unless current_regex
 
       new_value = value.to_s.gsub(/[^0-9]/, '')
       new_value ||= ''
