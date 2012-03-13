@@ -16,19 +16,21 @@ module ValidationKit
 
       return if error.nil?
 
-      item_name = I18n.t("activerecord.models.attributes.#{name.underscore}.#{attribute}",
+      model_name = record.class.to_s
+
+      item_name = I18n.t("activerecord.models.attributes.#{model_name.underscore}.#{attribute}",
                          :default => nil) or options[:attribute_name] or attribute
 
       if error == ALL_CAPS
-       message = I18n.t("activerecord.errors.models.attributes.#{name.underscore}.#{attr_name}.all_caps",
+       message = I18n.t("activerecord.errors.models.attributes.#{model_name.underscore}.#{attribute}.all_caps",
                    :item => item_name,
-                   :default => [:"activerecord.errors.models.#{name.underscore}.all_caps",
+                   :default => [:"activerecord.errors.models.#{model_name.underscore}.all_caps",
                                 options[:all_caps],
                                 :'activerecord.errors.messages.all_caps'])
       elsif error == ALL_LOWERCASE
-        message = I18n.t("activerecord.errors.models.attributes.#{name.underscore}.#{attr_name}.all_lowercase",
+        message = I18n.t("activerecord.errors.models.attributes.#{model_name.underscore}.#{attributes}.all_lowercase",
                     :item => item_name,
-                    :default => [:"activerecord.errors.models.#{name.underscore}.all_lowercase",
+                    :default => [:"activerecord.errors.models.#{model_name.underscore}.all_lowercase",
                                  options[:all_lowercase],
                                  :'activerecord.errors.messages.all_lowercase'])
       end

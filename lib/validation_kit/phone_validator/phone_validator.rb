@@ -30,8 +30,10 @@ module ValidationKit
       new_value = value.to_s.gsub(/[^0-9]/, '')
       new_value ||= ''
 
-      message = I18n.t("activerecord.errors.models.#{name.underscore}.attributes.#{attr_name}.invalid",
-                       :default => [:"activerecord.errors.models.#{name.underscore}.invalid",
+      model_name = record.class.to_s
+
+      message = I18n.t("activerecord.errors.models.#{model_name.underscore}.attributes.#{attribute}.invalid",
+                       :default => [:"activerecord.errors.models.#{model_name.underscore}.invalid",
                        options[:message], :'activerecord.errors.messages.invalid'])
 
       unless (options[:allow_blank] && new_value.blank?) || new_value =~ current_regex
@@ -42,7 +44,7 @@ module ValidationKit
           if formatted_phone.nil?
             record.errors[attribute] << message
           else
-            record.send(attr_name.to_s + '=', formatted_phone)
+            record.send(attribute.to_s + '=', formatted_phone)
           end
         end # options
       end # unless

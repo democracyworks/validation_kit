@@ -9,8 +9,9 @@ module ValidationKit
 
     def validate_each(record, attribute, value)
       unless EMAIL_ADDRESS_RE.match(value)
-        message = I18n.t("activerecord.errors.models.#{name.underscore}.attributes.#{attr_name}.invalid",
-                         :default => [:"activerecord.errors.models.#{name.underscore}.invalid",
+        model_name = record.class.to_s
+        message = I18n.t("activerecord.errors.models.#{model_name.underscore}.attributes.#{attribute}.invalid",
+                         :default => [:"activerecord.errors.models.#{model_name.underscore}.invalid",
                                       options[:message],
                                       :'activerecord.errors.messages.invalid'])
         record.errors[attribute] << message
