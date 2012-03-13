@@ -51,7 +51,7 @@ module ValidationKit
                          :default => [:"activerecord.errors.models.#{model_name.underscore}.invalid",
                                       options[:message],
                                       :'activerecord.errors.messages.invalid'])
-        record.errors[attribute] << message
+        record.errors[attribute].add message
       else
         record.send(attribute.to_s + '=',
           format_as_postal_code(new_value, country, disallowed_characters)

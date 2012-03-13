@@ -14,7 +14,7 @@ module ValidationKit
                          :default => [:"activerecord.errors.models.#{model_name.underscore}.invalid",
                                       options[:message],
                                       :'activerecord.errors.messages.invalid'])
-        record.errors[attribute] << message
+        record.errors[attribute].add message
       end
     end
   end
