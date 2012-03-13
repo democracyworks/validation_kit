@@ -37,12 +37,12 @@ module ValidationKit
                        options[:message], :'activerecord.errors.messages.invalid'])
 
       unless (options[:allow_blank] && new_value.blank?) || new_value =~ current_regex
-        record.errors[attribute].add message
+        record.errors.add(attribute, message)
       else
         if options[:set]
           formatted_phone = format_as_phone(value, country, options[:area_key])
           if formatted_phone.nil?
-            record.errors[attribute].add message
+            record.errors.add(attribute, message)
           else
             record.send(attribute.to_s + '=', formatted_phone)
           end

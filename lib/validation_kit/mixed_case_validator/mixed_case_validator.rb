@@ -35,7 +35,7 @@ module ValidationKit
                                  :'activerecord.errors.messages.all_lowercase'])
       end
 
-      record.errors[attribute].add message
+      record.errors.add(attribute, message)
 
     end
   end
